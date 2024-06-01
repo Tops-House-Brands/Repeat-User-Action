@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">  
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>LIFF - Tracking User</title>
+</head>
+<body>
+  <div id="loading-spinner" class="absolute bg-opacity-100 z-10 h-full w-full flex items-center justify-center">
+    <div class="flex items-center">
+      <div class="relative flex justify-center items-center">
+        <img src="https://global.discourse-cdn.com/business7/uploads/streamlit/original/2X/2/247a8220ebe0d7e99dbbd31a2c227dde7767fbe1.gif"/>
+      </div>
+    </div>
+  </div>
+<script>
+  window.onload = function () {
+  liff.init({liffId: "1661043437-VO3ZXWwo", 
+  withLoginOnExternalBrowser: true }).then(() => {
+  // ดึงค่า query string จาก URL ปัจจุบัน
+  const urlParams = new URLSearchParams(window.location.search);
+  const request = urlParams.get('barcode');
+  
+  const msg = [{
+  type: "text",
+  text: request,
+  }]
+  shareTargetPicker(msg)
+    
+  }).catch((error) => {
+  console.error("Error initializing LIFF:", error);
+  });
+    
+  function shareTargetPicker(msg){
+    liff.shareTargetPicker(msg).then(() => {
+    liff.closeWindow();
+  }
+  )}
+  }
+</script>  
+</body>
+</html>
