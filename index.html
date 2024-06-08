@@ -44,7 +44,11 @@
 
   function shareTargetPicker(msg){
     liff.shareTargetPicker(msg).then(() => {
-    liff.closeWindow();
+    if (!liff.isInClient()) {
+      window.close();
+    } else {
+      liff.closeWindow();
+    }
     })
   }
 
