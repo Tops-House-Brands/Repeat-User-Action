@@ -7,7 +7,9 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <title>LIFF - Tracking User</title>
 </head>
+  
 <body>
+  
   <div id="loading-spinner" class="absolute bg-opacity-100 z-10 h-full w-full flex items-center justify-center">
     <div class="flex items-center">
       <div class="relative flex justify-center items-center">
@@ -15,30 +17,39 @@
       </div>
     </div>
   </div>
-<script>
-  window.onload = function () {
-  liff.init({liffId: "1661043437-VO3ZXWwo", 
-  withLoginOnExternalBrowser: true }).then(() => {
-  // ดึงค่า query string จาก URL ปัจจุบัน
-  const urlParams = new URLSearchParams(window.location.search);
-  const request = urlParams.get('barcode');
   
-  const msg = [{
-  type: "text",
-  text: request,
-  }]
-  shareTargetPicker(msg)
-    
-  }).catch((error) => {
-  console.error("Error initializing LIFF:", error);
-  });
-    
+<script>
+  
+  async function main() {
+    await liff.init({ liffId: '1661043437-9dxBoR2G' });
+
+    // liff.logout()
+
+    if (!liff.isLoggedIn()) {
+      const destinationUrl = window.location.href;
+      liff.login({ redirectUri: destinationUrl });
+    }
+
+    // ดึงค่า query string จาก URL ปัจจุบัน
+    const urlParams = new URLSearchParams(window.location.search);
+    const request = urlParams.get('barcode');
+
+    const msg = 
+    [{
+      type: "text",
+      text: request,
+    }]
+    shareTargetPicker(msg)
+  }
+
   function shareTargetPicker(msg){
     liff.shareTargetPicker(msg).then(() => {
     liff.closeWindow();
+    })
   }
-  )}
-  }
-</script>  
+
+  main();
+  
+</script> 
 </body>
 </html>
