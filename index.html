@@ -39,8 +39,8 @@
       type: "text",
       text: request,
     }]
-    // shareTargetPicker(msg)
-    sendMessage(msg)
+    shareTargetPicker(msg)
+    // sendMessage(msg)
   }
 
   function shareTargetPicker(msg){
@@ -53,15 +53,15 @@
     })
   }
 
-    function sendMessage(msg){
-    liff.sendMessages(msg).then(() => {
-    if (!liff.isInClient()) {
-      window.close();
-    } else {
-      liff.closeWindow();
-    }
-    })
-  }
+  //   function sendMessage(msg){
+  //   liff.sendMessages(msg).then(() => {
+  //   if (!liff.isInClient()) {
+  //     window.close();
+  //   } else {
+  //     liff.closeWindow();
+  //   }
+  //   })
+  // }
 
   main();
   
